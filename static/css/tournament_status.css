@@ -1,0 +1,280 @@
+/* =====================================================
+   TOURNAMENT STATUS — Bracket visuel
+   ===================================================== */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: #0d1117;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    min-height: 100vh;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #161b22;
+    padding: 14px 28px;
+    border-bottom: 2px solid #e94560;
+}
+
+.navbar-logo {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #e94560;
+    letter-spacing: 1px;
+}
+
+/* ===== HEADER ===== */
+.tournament-header {
+    text-align: center;
+    padding: 30px 20px 10px;
+}
+
+.tournament-header h1 {
+    font-size: 1.8rem;
+    color: #ffd700;
+    letter-spacing: 2px;
+}
+
+.tournament-header .subtitle {
+    color: #8b949e;
+    font-size: 0.9rem;
+    margin-top: 6px;
+}
+
+/* ===== ROUND LABEL ===== */
+.round-label {
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #8b949e;
+    padding: 8px 0 0;
+}
+
+/* ===== BRACKET WRAPPER ===== */
+.bracket-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 0;
+    padding: 30px 20px 40px;
+    overflow-x: auto;
+}
+
+/* ===== COLONNE DE ROUND ===== */
+.round-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 180px;
+}
+
+/* ===== CONNECTEUR HORIZONTAL ===== */
+.connector-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 48px;
+    position: relative;
+}
+
+.connector-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.connector-line {
+    width: 48px;
+    height: 2px;
+    background-color: #30363d;
+}
+
+.connector-bracket {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 48px;
+    gap: 0;
+}
+
+.connector-bracket .top-line {
+    width: 24px;
+    height: 2px;
+    background-color: #30363d;
+    align-self: flex-end;
+}
+
+.connector-bracket .vert-line {
+    width: 2px;
+    background-color: #30363d;
+    align-self: flex-end;
+    flex: 1;
+    min-height: 20px;
+}
+
+.connector-bracket .bot-line {
+    width: 24px;
+    height: 2px;
+    background-color: #30363d;
+    align-self: flex-end;
+}
+
+.connector-bracket .exit-line {
+    width: 48px;
+    height: 2px;
+    background-color: #30363d;
+    position: absolute;
+    left: 0;
+}
+
+/* ===== CARTE DE MATCH ===== */
+.match-card {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    width: 170px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+}
+
+.match-card.match-in-progress {
+    border-color: #e94560;
+    box-shadow: 0 0 12px rgba(233, 69, 96, 0.25);
+}
+
+.match-card.match-done {
+    border-color: #238636;
+}
+
+/* ===== LIGNE JOUEUR DANS LE MATCH ===== */
+.player-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 12px;
+    border-bottom: 1px solid #21262d;
+    font-size: 0.85rem;
+}
+
+.player-row:last-child {
+    border-bottom: none;
+}
+
+.player-row.winner-row {
+    background-color: #0f2c1a;
+    color: #3fb950;
+    font-weight: bold;
+}
+
+.player-row.loser-row {
+    color: #484f58;
+}
+
+.player-name {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 110px;
+}
+
+.trophy-icon {
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+
+/* ===== BADGE EN COURS ===== */
+.in-progress-badge {
+    font-size: 0.7rem;
+    color: #e94560;
+    text-align: center;
+    padding: 4px 0;
+    background-color: rgba(233, 69, 96, 0.08);
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* ===== VAINQUEUR FINAL ===== */
+.champion-card {
+    background: linear-gradient(135deg, #1a1000, #2a1f00);
+    border: 2px solid #ffd700;
+    border-radius: 12px;
+    width: 170px;
+    text-align: center;
+    padding: 20px 14px;
+    box-shadow: 0 0 24px rgba(255, 215, 0, 0.2);
+}
+
+.champion-card .trophy {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.champion-card .champion-name {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffd700;
+}
+
+.champion-card .champion-label {
+    font-size: 0.7rem;
+    color: #a07820;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+/* ===== ATTENTE ===== */
+.waiting-card {
+    background-color: #161b22;
+    border: 1px dashed #30363d;
+    border-radius: 10px;
+    width: 170px;
+    padding: 16px;
+    text-align: center;
+    color: #484f58;
+    font-size: 0.8rem;
+}
+
+/* ===== FOOTER ===== */
+.tournament-footer {
+    text-align: center;
+    padding: 10px 20px 30px;
+    color: #484f58;
+    font-size: 0.85rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 700px) {
+    .bracket-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .connector-col { display: none; }
+
+    .round-col {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .round-label { margin-top: 10px; }
+}

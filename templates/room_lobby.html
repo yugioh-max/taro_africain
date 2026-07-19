@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Taro Africain {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/room_lobby.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<! -- NAVBAR -- >
+<nav class="navbar">
+    <div class="navbar-logo">Taro Africain</div>
+    <div class="navbar-user">
+        <span>{{user.username}}</span>
+        <a href="{% url 'logout' %}" class="btn-logout">Déconnexion</a>
+    </div>
+</nav>
+
+<div id="room-data" data-room-code="{{ room_code }}" data-max-players="{{room.max_players}}"></div>
+
+<div class="room-container">
+    <div class="room-card">
+        <!--EN-TÊTE-->
+        <h2>{{room.name}}</h2>
+        <p class="room-code">Code : <strong>{{room_code}}</strong></p>
+
+        <!--LISTE-DES-JOUEURS-->
+                
+        <!-- Change la section joueurs -->
+        <div class="players-section">
+            <h3>👥 Joueurs ({{ players.count }}/{{ room.max_players }})</h3>
+            <div id="players-list">
+                {% for rp in players %}
+                <div class="player-item">
+                    <span class="player-status">✅</span>
+                    <span class="player-name">
+                        {{ rp.user.username }}
+                        {% if rp.user == room.host %}
+                        <span class="host-badge">Host</span>
+                        {% endif %}
+                    </span>
+                </div>
+                {% endfor %}
+                <!-- slots vides -->
+                {% for i in empty_slots %}
+                <div class="player-item {% if not room.is_vs_ai %}empty{% endif %}">
+                    {% if room.is_vs_ai %}
+                        <span class="player-status">bot</span>
+                        <span class="player-name">IA</span>
+                    {% else %}
+                        <span class="player-status">⏳</span>
+                        <span class="player-name">En attente...</span>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!--BOUTON-DEMARRER(host-uniquement)-->
+        {% if is_host %}
+        <div class="options-section">
+            <h3>Options de Partie</h3>
+
+            <form action="{% url 'update_options' room_code %}" method="POST">
+                {% csrf_token %}
+                <div class="option-readonly">
+                    <span>Valet bloque le take-it</span>
+                    <strong>{{ room.options_json.jack_blocks_takeit|yesno:"✅,❌"}}</strong>
+                </div>
+                <div class="option-readonly">
+                    <span>2 passe partout</span>
+                    <strong>{{ room.options_json.two_wildcard|yesno:"✅,❌"}}</strong>
+                </div>
+            </form>
+        </div>
+        <form method="POST" action="{% url 'start_game' room_code %}">
+            {% csrf_token %}
+            <button type="submit" class="btn-start">Démarrer la partie</button>    
+        </form>
+        {% else %}
+        <div class="options-section">
+            <h3>Options de Partie</h3>
+            <p>Valet bloque take-it: <strong>{{ room.options_json.jack_blocks_takeit|yesno:"✅,❌" }}</strong></p>
+            <p>2 passe partout: <strong>{{ room.options_json.two_wildcard|yesno:"✅,❌" }}</strong></p>
+        </div>
+        <p class="waiting-msg">En attente du host</p>
+        {% endif %}
+
+        <form method="POST" action="{% url 'leave_room' room_code %}" >
+            {% csrf_token %}
+            <button type="submit" class="form-retour">Quitter la salle</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="{% static 'js/room_lobby.js' %}"></script>
+{% endblock %}

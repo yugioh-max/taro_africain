@@ -1,0 +1,125 @@
+/* =====================================================
+   TOURNAMENT MENU — page intermédiaire "Créer / Rejoindre"
+   ===================================================== */
+
+/* ===== NAVBAR ===== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #16213e;
+    padding: 15px 30px;
+}
+
+.navbar-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #e94560;
+}
+
+.navbar-user {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: white;
+}
+
+.btn-logout {
+    background-color: #e94560;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.btn-logout:hover {
+    background-color: #c73652;
+}
+
+/* ===== CONTAINER ===== */
+.create-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px);
+    padding: 30px;
+}
+
+/* ===== CARTE ===== */
+.create-card {
+    background-color: #16213e;
+    border-radius: 15px;
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    text-align: center;
+}
+
+.create-card h2 {
+    color: #e94560;
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.create-card .subtitle {
+    color: #a0a0b0;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+}
+
+/* ===== BOUTONS PRINCIPAUX ===== */
+.tournament-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.tournament-options a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: white;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.btn-create-tournament {
+    background-color: #e94560;
+}
+
+.btn-create-tournament:hover {
+    background-color: #c73652;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(233,69,96,0.4);
+}
+
+.btn-join-tournament {
+    background-color: #0f3460;
+}
+
+.btn-join-tournament:hover {
+    background-color: #163d70;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(15,52,96,0.5);
+}
+
+/* ===== RETOUR ===== */
+.btn-retour {
+    display: block;
+    color: #a0a0b0;
+    text-decoration: none;
+    margin-top: 10px;
+    font-size: 0.95rem;
+}
+
+.btn-retour:hover {
+    color: white;
+}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Accueil Taro Africain {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/accueil.css' %}">
+{% endblock %}
+
+{% block content %}
+<! -- NAVBAR -- >
+<nav class="navbar">
+    <div class="navbar-logo">Taro Africain</div>
+    <div class="navbar-user">
+        <span>{{user.username}}</span>
+        <a href="{% url 'logout' %}" class="btn-logout">Déconnexion</a>
+    </div>
+</nav>
+<! Contenu principal>
+<div class="accueil-container">
+
+    <! COLONNE DROITE PROFIL >
+    <div class="profil-card">
+        <h2>Mon Profil</h2>
+        <p>Pseudo: <strong>{{user.username}}</strong></p>
+        <p>Parties Jouées: <strong>{{games_played}}</strong></p>
+        <p>Victoires: <strong>{{games_won}}</strong></p>
+        <p>Défaites: <strong>{{games_lost}}</strong></p>
+    </div>
+
+    <! COLONNE GAUCHE : JOUER>
+    <div class="jouer-card">
+        <h2>Jouer</h2>
+        <a href="{% url 'create_room' %}" class="btn-jouer">Créer une salle</a>
+        <a href="{% url 'join_room' %}" class="btn-jouer">Rejoindre une salle</a>
+        <a href="{% url 'ai_room' %}" class="btn-jouer">Jouer contre IA</a>
+        <a href="{% url 'tournament_menu' %}" class="btn-jouer">Tournoi</a>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Créer un tournoi — Taro Africain{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/create_room.css' %}">
+{% endblock %}
+
+{% block content %}
+<nav class="navbar">
+    <div class="navbar-logo">Taro Africain</div>
+    <div class="navbar-user">
+        <span>{{ user.username }}</span>
+        <a href="{% url 'logout' %}" class="btn-logout">Déconnexion</a>
+    </div>
+</nav>
+
+<div class="create-container">
+    <div class="create-card">
+        <h2>🏆 Créer un tournoi (8 places)</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label>Nombre de joueurs humains acceptés</label>
+            <select name="max_players">
+                <option value="1">1 humain (7 IA)</option>
+                <option value="2">2 humains (6 IA)</option>
+                <option value="3">3 humains (5 IA)</option>
+                <option value="4">4 humains (4 IA)</option>
+                <option value="5" selected>5 humains (3 IA)</option>
+                <option value="6">6 humains (2 IA)</option>
+                <option value="7">7 humains (1 IA)</option>
+                <option value="8">8 humains (0 IA)</option>
+            </select>
+
+            <div class="option-item">
+                <input type="checkbox" name="jack_blocks_takeit" id="jack_blocks_takeit">
+                <label for="jack_blocks_takeit">Valet bloque le take-it</label>
+            </div>
+            <div class="option-item">
+                <input type="checkbox" name="two_wildcard" id="two_wildcard">
+                <label for="two_wildcard">2 passe partout</label>
+            </div>
+
+            <button type="submit">Créer le tournoi</button>
+        </form>
+
+        <a href="{% url 'home' %}" class="btn-retour">Quitter</a>
+    </div>
+</div>
+{% endblock %}

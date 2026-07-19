@@ -1,0 +1,15 @@
+Django
+channels
+python-dotenv
+pillow
+pip
+asgiref
+setuptools
+daphne
+whitenoise
+redias
+channels-redis
+gunicorn
+whitenoise
+dj-database-url
+psycopg2-binary

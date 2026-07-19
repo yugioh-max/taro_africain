@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inscription Taro Africain {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-card">
+        <h1>Taro Africain</h1>
+        <h2>Inscription</h2>
+
+        {% if error %}
+        <div class="error-message">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Entrer un Pseudo">
+            <input type="password" name="password" placeholder="Entrer un mot de passe">
+            <button type="submit">S'inscrire</button>
+        </form>
+        <p>Déjà un compte ? <a href="{% url 'login' %}">Connectez-vous</a></p>
+    </div>
+</div>
+{% endblock %}

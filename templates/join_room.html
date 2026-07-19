@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Rejoindre une salle {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/join_room.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<! -- NAVBAR -- >
+<nav class="navbar">
+    <div class="navbar-logo">Taro Africain</div>
+    <div class="navbar-user">
+        <span>👤{{request.user.username}}</span>
+        <a href="{% url 'logout' %}" class="btn-logout">🚪Déconnexion</a>
+    </div>
+</nav>
+
+<div class="join-container">
+    <div class="join-card">
+        <h2>Rejoindre une salle</h2>
+
+        {% if error %}
+        <div class="error-message">{{ error }}</div>
+        {% endif %}
+
+        {% if rooms %}
+        {% for room in rooms %}
+        <div class="room-item">
+            <div class="room-info">
+                <span class="room-name">{{ room.name }}</span>
+                <span class="room-players">👥{{ room.roomplayer_set.count }}/{{ room.max_players }}</span>
+                {% if room.is_private %}
+                <span class="room-private">🔒Privée</span>
+                {% else %}
+                <span class="room-public">🌐Publique</span>
+                {% endif %}
+            </div>
+
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="room_code" value="{{ room.room_code }}">
+
+                {% if room.is_private %}
+                <input type="password" name="password" placeholder="Mot de passe">
+                {% endif %}
+                
+                <button type="submit">Rejoindre</button>
+            </form>
+        </div>
+        {% endfor %}
+
+        {% else %}
+        <p class="no-rooms">Aucune salle disponible pour le moment</p>
+        {% endif %}
+
+        <a href="{% url 'home' %}" class="btn-retour">Retour</a>
+    </div>
+</div>
+
+{% endblock %}

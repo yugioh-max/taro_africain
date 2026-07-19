@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Tournoi — Taro Africain{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/tournament_menu.css' %}">
+{% endblock %}
+
+{% block content %}
+<nav class="navbar">
+    <div class="navbar-logo">Taro Africain</div>
+    <div class="navbar-user">
+        <span>{{ user.username }}</span>
+        <a href="{% url 'logout' %}" class="btn-logout">Déconnexion</a>
+    </div>
+</nav>
+
+<div class="create-container">
+    <div class="create-card">
+        <h2>🏆 Tournoi</h2>
+        <p class="subtitle">Affrontez 07 participants humains/IA</p>
+        <div class="tournament-options">
+            <a href="{% url 'create_tournament' %}" class="btn-create-tournament">Créer un tournoi</a>
+            <a href="{% url 'join_tournament' %}" class="btn-join-tournament">Rejoindre un tournoi</a>
+        </div>
+        
+        <a href="{% url 'home' %}" class="btn-retour">← Retour</a>
+    </div>
+</div>
+{% endblock %}

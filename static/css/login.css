@@ -1,0 +1,98 @@
+/* ===== FOND ===== */
+body {
+    background-color: #1a1a2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* ===== CARTE ===== */
+.login-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    background-color: #16213e;
+    border-radius: 15px;
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+/* ===== TITRES ===== */
+.login-card h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #e94560;
+}
+
+.login-card h2 {
+    font-size: 1.2rem;
+    color: #a0a0b0;
+    margin-bottom: 30px;
+}
+
+/* ===== INPUTS ===== */
+input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #0f3460;
+    border-radius: 8px;
+    background-color: #0f3460;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+}
+
+input:focus {
+    border-color: #e94560;
+}
+
+/* ===== BOUTON ===== */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #e94560;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #c73652;
+}
+
+/* ===== LIEN ===== */
+.login-card p {
+    margin-top: 20px;
+    color: #a0a0b0;
+}
+
+.login-card a {
+    color: #e94560;
+    text-decoration: none;
+}
+
+.login-card a:hover {
+    text-decoration: underline;
+}
+
+/* ===== ERREUR ===== */
+.error-message {
+    background-color: rgba(233, 69, 96, 0.2);
+    border: 1px solid #e94560;
+    color: #e94560;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}

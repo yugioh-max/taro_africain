@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Jouer vs IA {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/create_room.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<! -- NAVBAR -- >
+<nav class="navbar">
+    <div class="navbar-logo">Taro Africain</div>
+    <div class="navbar-user">
+        <span>👤{{request.user.username}}</span>
+        <a href="{% url 'logout' %}" class="btn-logout">🚪Déconnexion</a>
+    </div>
+</nav>
+
+<div class="create-container">
+    <div class="create-card">
+        <h2>Jouer vs IA</h2>
+
+        {% if error %}
+        <div class="error-message">{{error}}</div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label >Nombre de joueurs (toi+IA) </label>
+            <select name="max_players" id="">
+                <option value="2" selected>02 Joueurs(1 IA)</option>
+                <option value="3">03 Joueurs(2 IA)</option>
+                <option value="4">04 Joueurs(3 IA)</option>
+                <option value="5">05 Joueurs(4 IA)</option>
+                <option value="6">06 Joueurs(5 IA)</option>
+                <option value="7">07 Joueurs(6 IA)</option>
+                <option value="8">08 Joueurs(7 IA)</option>
+            </select>
+
+            <div class="option-item">
+                <input type="checkbox" name="jack_blocks_takeit" id="jack_blocks_takeit">
+                <label for="jack_blocks_takeit"> Valet bloque le take-it</label>
+            </div>
+
+            <div class="option-item">
+                <input type="checkbox" name="two_wildcard" id="two_wildcard">
+                <label for="two_wildcard"> 2 passe partout</label>
+            </div>
+
+            <button type="submit">Démarrer la partie</button>
+        </form>
+
+        <a href="{% url 'home' %}" class="btn-retour">Quitter</a>
+    </div>
+</div>
+{% endblock %}

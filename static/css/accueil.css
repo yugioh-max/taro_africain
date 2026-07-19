@@ -1,0 +1,86 @@
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #16213e;
+    padding: 15px 30px;
+}
+
+.navbar-logo{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #e94560;
+}
+
+.navbar-user{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: white;
+}
+
+.btn-logout{
+    background-color: #e94560;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.btn-logout:hover{
+    background-color: #c73652;
+}
+
+/*===========CONTTAINER===========*/
+
+.accueil-container{
+    display: flex;
+    gap: 30px;
+    padding: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.profil-card{
+    min-width: 300px;
+    max-width: 350px;
+}
+
+.jouer-card{
+    flex: 1;
+}
+
+.profil-card h2, .jouer-card h2 {
+    color: #e94560;
+    margin-bottom: 20px;
+}
+
+.profil-card p{
+    color: #a0a0a0;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.profil-card strong{
+    color: white;
+}
+
+/*=============BOUTONS JOUER=============*/
+
+.btn-jouer {
+    display: block;
+    width: 50%;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #0f3460;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.btn-jouer:hover{
+    background-color: #e94560;
+}

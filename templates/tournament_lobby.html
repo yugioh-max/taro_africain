@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Tournoi {{ code }} — Taro Africain{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/room_lobby.css' %}">
+{% endblock %}
+
+{% block content %}
+<nav class="navbar">
+    <div class="navbar-logo">Taro Africain</div>
+</nav>
+
+<div class="room-container">
+    <div class="room-card">
+        <h2>🏆 Tournoi {{ code }}</h2>
+
+        <div id="tournament-data"
+            data-code="{{ code }}"
+            data-max-players="{{ state.max_players }}"
+            data-total-bots="{{ state.total_bots }}"
+            style="display: none;">
+        </div>
+
+        <div class="players-section">
+            <h3>👥 Participants (<span id="nb-humains">{{ state.players|length }}</span>/{{state.max_players }} humains)</h3>
+            <div id="tournament-players-list">
+                {% for p in state.players %}
+                <div class="player-item">
+                    <span class="player-status">✅</span>
+                    <span class="player-name">
+                        {{ p.username }}
+                        {% if p.is_host %}<span class="host-badge">Host</span>{% endif %}
+                    </span>
+                </div>
+                {% endfor %}
+
+                {% for i in empty_slots_range %}
+                <div class="player-item empty">
+                    <span class="player-status">⏳</span>
+                    <span class="player-name">En attente...</span>
+                </div>
+                {% endfor %}
+
+                {% for i in total_bots_range %}
+                <div class="player-item">
+                    <span class="player-status">🤖</span>
+                    <span class="player-name">IA</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% if is_host %}
+        <form method="POST" action="{% url 'start_tournament' code %}">
+            {% csrf_token %}
+            <button type="submit" class="btn-start">🚀 Démarrer le tournoi</button>
+        </form>
+        {% endif %}
+
+        <form method="POST" action="{% url 'leave_tournament' code %}">
+            {% csrf_token %}
+            <button type="submit" class="form_retour">Quitter le tournoi</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/tournament_lobby.js' %}"></script>
+{% endblock %}
+
+

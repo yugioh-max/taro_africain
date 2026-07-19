@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Tournoi {{ code }} — Bracket{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/tournament_status.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<nav class="navbar">
+    <div class="navbar-logo">🃏 Taro Africain</div>
+</nav>
+
+<div class="tournament-header">
+    <h1>🏆 Tournoi {{ code }}</h1>
+    <p class="subtitle">
+        {% if tournament.status == 'finished' %}
+            Tournoi terminé
+        {% else %}
+            Tour {{ current_round }} en cours
+        {% endif %}
+    </p>
+</div>
+
+<!-- BRACKET -->
+<div class="bracket-wrapper">
+
+    {% for round_data in all_rounds %}
+
+    <!-- COLONNE DU ROUND -->
+    <div>
+        <div class="round-label">
+            {% if round_data.round_number == total_rounds %}
+                Finale
+            {% elif round_data.round_number == total_rounds|add:"-1" %}
+                Demi-finales
+            {% else %}
+                Tour {{ round_data.round_number }}
+            {% endif %}
+        </div>
+        <div class="round-col" style="gap: {{ round_data.gap }}px; padding-top: {{ round_data.padding_top }}px; padding-bottom: {{ round_data.padding_top }}px;">
+            {% for match in round_data.matches %}
+
+            {% if match.is_tbd %}
+            <!-- Match pas encore connu -->
+            <div class="waiting-card">⏳ À déterminer</div>
+
+            {% elif match.finished %}
+            <!-- Match terminé -->
+            <div class="match-card match-done">
+                <div class="player-row {% if match.winner == match.p1 %}winner-row{% else %}loser-row{% endif %}">
+                    <span class="player-name">
+                        {% if match.winner == match.p1 %}
+                        <span class="trophy-icon">🏆</span>
+                        {% endif %}
+                        {{ match.p1 }}
+                    </span>
+                </div>
+                <div class="player-row {% if match.winner == match.p2 %}winner-row{% else %}loser-row{% endif %}">
+                    <span class="player-name">
+                        {% if match.winner == match.p2 %}
+                        <span class="trophy-icon">🏆</span>
+                        {% endif %}
+                        {{ match.p2 }}
+                    </span>
+                </div>
+            </div>
+
+            {% else %}
+            <!-- Match en cours -->
+            <div class="match-card match-in-progress">
+                <div class="player-row">
+                    <span class="player-name">{{ match.p1 }}</span>
+                </div>
+                <div class="player-row">
+                    <span class="player-name">{{ match.p2 }}</span>
+                </div>
+                <div class="in-progress-badge">⚔️ EN COURS</div>
+            </div>
+            {% endif %}
+
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- CONNECTEUR entre rounds (sauf après le dernier) -->
+    {% if not forloop.last %}
+    <div class="connector-col">
+        {% for match in round_data.matches %}
+        <div style="display:flex; align-items:center; height: {{ round_data.connector_height }}px;">
+            <div style="width:48px; height:2px; background:#30363d;"></div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% endfor %}
+
+    <!-- VAINQUEUR FINAL -->
+    {% if tournament.status == 'finished' %}
+    <div>
+        <div class="round-label">Vainqueur</div>
+        <div class="round-col" style="padding-top: 20px;">
+            <div class="champion-card">
+                <span class="trophy">🏆</span>
+                <div class="champion-name">{{ champion_name }}</div>
+                <div class="champion-label">Champion</div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+
+<!-- STATUT -->
+{% if tournament.status != 'finished' %}
+<div class="tournament-footer">
+    ⏳ En attente de la fin des autres matchs du tour {{ current_round }}...
+</div>
+{% endif %}
+
+<!-- DONNÉES WEBSOCKET -->
+<div id="tournament-data"
+     data-code="{{ code }}"
+     data-my-id="{{ my_id }}"
+     data-max-players="0"
+     data-total-bots="0"
+     style="display:none;"></div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/tournament_lobby.js' %}"></script>
+{% endblock %}

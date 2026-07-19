@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Rejoindre un tournoi — Taro Africain{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/join_room.css' %}">
+{% endblock %}
+
+{% block content %}
+<nav class="navbar">
+    <div class="navbar-logo">Taro Africain</div>
+    <div class="navbar-user">
+        <span>{{ user.username }}</span>
+        <a href="{% url 'logout' %}" class="btn-logout">Déconnexion</a>
+    </div>
+</nav>
+
+<div class="join-container">
+    <div class="join-card">
+        <h2>🏆 Rejoindre un tournoi</h2>
+
+        {% if error %}
+        <div class="error-message">{{ error }}</div>
+        {% endif %}
+
+        {% if tournaments %}
+        {% for t in tournaments %}
+        <div class="room-item">
+            <div class="room-info">
+                <span class="room-name">Tournoi {{ t.code }}</span>
+                <span class="room-players">{{ t.max_players }} places humaines</span>
+            </div>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="code" value="{{ t.code }}">
+                <button type="submit">Rejoindre</button>
+            </form>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p class="no-rooms">Aucun tournoi disponible pour le moment.</p>
+        {% endif %}
+
+        <a href="{% url 'home' %}" class="btn-retour">← Retour</a>
+    </div>
+</div>
+{% endblock %}
+
