@@ -7,7 +7,7 @@ asgiref
 setuptools
 daphne
 whitenoise
-redias
+redis
 channels-redis
 gunicorn
 whitenoise
