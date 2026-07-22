@@ -1,1 +1,2 @@
-web: daphne -b 0.0.0.0 -p $PORT config.asgi:application
+web: daphne config.asgi:application --port $PORT --bind 0.0.0.0
+release: python manage.py migrate && python manage.py collectstatic --noinput
