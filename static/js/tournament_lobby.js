@@ -3,7 +3,8 @@ const code = tData.dataset.code;
 const maxPlayers = parseInt(tData.dataset.maxPlayers);
 const totalBots = parseInt(tData.dataset.totalBots);
 
-const socket = new WebSocket(`ws://${window.location.host}/ws/tournament/${code}/`);
+const wsProtocol = window.location.protocol === 'https:' ? 'wss//' : 'ws://';
+const socket = new WebSocket(`${wsProtocol}${window.location.host}/ws/game/${roomCode}/`);
 
 socket.onmessage = function(event){
     const data = JSON.parse(event.data);
