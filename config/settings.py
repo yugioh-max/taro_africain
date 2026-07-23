@@ -156,6 +156,7 @@ CHANNEL_LAYERS = {
 LOGIN_URL = '/accounts/login/'
 
 CSRF_TRUSTED_ORIGINS = [
+    'https://taro-africain.up.railway.app',
     'https://*railway.app',
     'http://localhost:8000', 
     'http://127.0.0.1:8000', 
