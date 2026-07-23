@@ -2,8 +2,8 @@ const roomData = document.getElementById('room-data');
 const roomCode = roomData.dataset.roomCode;
 const maxPlayers = parseInt(roomData.dataset.maxPlayers);
 
-const wsProtocol = window.location.protocol === 'https:' ? 'wss//' : 'ws://';
-const socket = new WebSocket(`${wsProtocol}${window.location.host}/ws/game/${roomCode}/`);
+const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+const socket = new WebSocket(`${wsProtocol}://${window.location.host}/ws/game/${roomCode}/`);
 
 socket.onopen = function() {
     console.log("WebSocket connecté !");

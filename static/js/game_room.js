@@ -4,8 +4,8 @@ const playerId = gameData.dataset.playerId;
 let gameEnded = false;
 
 //============CONNEXION WEBSOCKET
-const wsProtocol = window.location.protocol === 'https:' ? 'wss//' : 'ws://';
-const socket = new WebSocket(`${wsProtocol}${window.location.host}/ws/game/${roomCode}/`);
+const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws:';
+const socket = new WebSocket(`${wsProtocol}://${window.location.host}/ws/game/${roomCode}/`);
 
 socket.onopen = function(){
     console.log("WebSocket jeu Connecté !");
